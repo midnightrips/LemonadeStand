@@ -40,5 +40,33 @@ namespace LemonadeStand
             return quantityOfItem;
         }
 
+        public static bool PlayAgain()
+        {
+            bool playAgain = false;
+
+            Console.WriteLine("Would you like to play again? (Y/N)");
+
+            string playerAnswer = Console.ReadLine();
+            playerAnswer = playerAnswer.ToLower();
+
+            while(playerAnswer != "y" || playerAnswer != "n")
+            {
+                Console.WriteLine($"Response not recognized.\nPlease type Y for YES or N for NO:");
+                playerAnswer = Console.ReadLine();
+                playerAnswer = playerAnswer.ToLower();
+            }
+
+            if (playerAnswer == "y" || playerAnswer == "yes")
+            {
+                playAgain = true;
+            }
+            else if (playerAnswer == "n" || playerAnswer == "no")
+            {
+                playAgain = false;
+            }
+            
+            return playAgain;
+        }
+
     }
 }

@@ -4,12 +4,12 @@
     {
         static void Main(string[] args)
         {
-            
+            Game game = new Game();
+
+            game.playGame();
+
         }
 
-        static void DisplayWelcome()
-        {
-            Console.WriteLine("Welcome To Lemonade Stand!");
-        }
+
     }
 }

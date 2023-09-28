@@ -17,5 +17,9 @@ namespace LemonadeStand
         }
 
         //member methods (CAN DO)
+        public void playGame() // this is
+        {
+
+        }
     }
 }
