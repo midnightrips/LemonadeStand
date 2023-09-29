@@ -6,7 +6,7 @@
         {
             Game game = new Game();
 
-            game.playGame();
+            game.PlayGame();
 
         }
 
