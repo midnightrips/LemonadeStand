@@ -16,5 +16,7 @@ namespace LemonadeStand
         }
 
         //member methods (CAN DO)
+
+        //if temp <75 less customers
     }
 }

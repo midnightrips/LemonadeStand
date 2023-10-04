@@ -13,6 +13,7 @@ namespace LemonadeStand
 
         public Day()
         {
+            
         }
 
         //member methods (CAN DO)

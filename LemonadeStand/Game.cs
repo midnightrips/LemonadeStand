@@ -14,6 +14,7 @@ namespace LemonadeStand
 
         public Game()
         {
+            player = new Player();
         }
 
         //member methods (CAN DO)
@@ -25,8 +26,19 @@ namespace LemonadeStand
         public void PlayGame() // this is where most of the methods will be called
         {
             DisplayWelcome();
-        }
 
+            //Display day #
+
+            Weather weather = new Weather(); //i shouldn't have to do this here
+            weather.Forecast();
+
+            //Display player’s inventory and amount of money they have
+            player.DisplayInventory();
+
+            //Ask if they want to go to store
+
+        }
+        
 
 
     }

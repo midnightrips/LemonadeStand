@@ -21,7 +21,7 @@ namespace LemonadeStand
         }
 
         
-        public string Forecast()
+        public void Forecast()
         {
             int conditionIndex = rand.Next(weatherConditions.Count);
             condition = weatherConditions[conditionIndex];
@@ -38,9 +38,9 @@ namespace LemonadeStand
             {
                 predictedForecast = "Chance of rain";
             }
-           
+
             //predictedForecast = rand.Next()
-            return predictedForecast;
+            Console.WriteLine(predictedForecast);
         }
 
         public void ActualWeather()
