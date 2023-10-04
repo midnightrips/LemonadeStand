@@ -36,9 +36,37 @@ namespace LemonadeStand
             player.DisplayInventory();
 
             //Ask if they want to go to store
-
+            bool notAnOption = false;
+            do
+            {
+                Console.WriteLine("Would you like to purchase more items? (Y/N)");
+                string buyMore = Console.ReadLine();
+                buyMore = buyMore.ToLower();
+                if (buyMore != "y" && buyMore != "n" && buyMore != "yes" && buyMore != "no")
+                {
+                    Console.WriteLine("Please enter either Y/N");
+                    notAnOption = true;
+                }
+                else if (buyMore == "y" || buyMore == "yes")
+                {
+                    notAnOption = false;
+                    BuyItems();
+                }
+                else if (buyMore == "n" || buyMore == "no")
+                {
+                    notAnOption = false;
+                    //break; don't need this
+                }
+            } while (notAnOption == true);
         }
-        
+        public void BuyItems()
+        {
+            Store store = new(); //this is definitely not how I should be doing this.......
+            store.SellLemons(player);
+            store.SellSugarCubes(player);
+            store.SellIceCubes(player);
+            store.SellCups(player);
+        }
 
 
     }

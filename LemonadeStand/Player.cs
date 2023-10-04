@@ -23,7 +23,7 @@ namespace LemonadeStand
         }
 
         // member methods (CAN DO)
-        public void DisplayInventory()
+        public void DisplayInventory() //this doesn't make sense to have in this class but I'm struggling to access the wallet money in the game class....
         {
             //simplify using UI since the only thing that changes is the object?
             Console.WriteLine($"You have ${wallet.Money}.");
@@ -32,4 +32,12 @@ namespace LemonadeStand
             Console.WriteLine($"You have {inventory.iceCubes.Count} ice cubes.");
             Console.WriteLine($"You have {inventory.cups.Count} cups.");
         }
+        //public void BuyItems()
+        //{
+        //    Store store = new(); //this is definitely not how I should be doing this.......
+        //    store.SellLemons(player);
+
+        //}
+
+    }
 }

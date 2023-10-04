@@ -26,7 +26,7 @@ namespace LemonadeStand
         // member methods (CAN DO)
         public void SellLemons(Player player)
         {
-            int lemonsToPurchase = UserInterface.GetNumberOfItems("lemons");
+            int lemonsToPurchase = UserInterface.GetNumberOfItems("lemons (50 cents)");
             double transactionAmount = CalculateTransactionAmount(lemonsToPurchase, pricePerLemon);
             if(player.wallet.Money >= transactionAmount)
             {
@@ -37,7 +37,7 @@ namespace LemonadeStand
 
         public void SellSugarCubes(Player player)
         {
-            int sugarToPurchase = UserInterface.GetNumberOfItems("sugar");
+            int sugarToPurchase = UserInterface.GetNumberOfItems("sugar cubes (10 cents)");
             double transactionAmount = CalculateTransactionAmount(sugarToPurchase, pricePerSugarCube);
             if(player.wallet.Money >= transactionAmount)
             {
@@ -48,7 +48,7 @@ namespace LemonadeStand
 
         public void SellIceCubes(Player player)
         {
-            int iceCubesToPurchase = UserInterface.GetNumberOfItems("ice cubes");
+            int iceCubesToPurchase = UserInterface.GetNumberOfItems("ice cubes (1 cent)");
             double transactionAmount = CalculateTransactionAmount(iceCubesToPurchase, pricePerIceCube);
             if(player.wallet.Money >= transactionAmount)
             {
@@ -59,7 +59,7 @@ namespace LemonadeStand
 
         public void SellCups(Player player)
         {
-            int cupsToPurchase = UserInterface.GetNumberOfItems("cups");
+            int cupsToPurchase = UserInterface.GetNumberOfItems("cups (25 cents)");
             double transactionAmount = CalculateTransactionAmount(cupsToPurchase, pricePerCup);
             if(player.wallet.Money >= transactionAmount)
             {
