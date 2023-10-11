@@ -11,10 +11,15 @@ namespace LemonadeStand
         private Player player;
         private List<Day> days;
         private int currentDay;
+        public Store store;
+        public Recipe recipe;
 
         public Game()
         {
             player = new Player();
+            //instantiate new list of days
+            store = new();
+            recipe = new();
         }
 
         //member methods (CAN DO)
@@ -25,43 +30,61 @@ namespace LemonadeStand
         }
         public void PlayGame() // this is where most of the methods will be called
         {
+            
             DisplayWelcome();
-
-            //Display day #
-
-            Weather weather = new Weather(); //i shouldn't have to do this here
-            weather.Forecast();
-
-            //Display player’s inventory and amount of money they have
-            player.DisplayInventory();
-
-            //Ask if they want to go to store
-            bool notAnOption = false;
-            do
+            for (currentDay = 1; currentDay < 8; currentDay++)
             {
-                Console.WriteLine("Would you like to purchase more items? (Y/N)");
-                string buyMore = Console.ReadLine();
-                buyMore = buyMore.ToLower();
-                if (buyMore != "y" && buyMore != "n" && buyMore != "yes" && buyMore != "no")
+
+                //Display day currentDay #
+                Console.WriteLine($"\nDay {currentDay} begins!\n");
+
+                
+                //day.weather.Forecast();
+
+                //Display player’s inventory and amount of money they have
+                player.DisplayInventory();
+
+                //Ask if they want to go to store
+                bool notAnOption = false;
+                do //I feel like this can be put into the UI (purchase items and change recipe)
                 {
-                    Console.WriteLine("Please enter either Y/N");
-                    notAnOption = true;
-                }
-                else if (buyMore == "y" || buyMore == "yes")
-                {
-                    notAnOption = false;
-                    BuyItems();
-                }
-                else if (buyMore == "n" || buyMore == "no")
-                {
-                    notAnOption = false;
-                    //break; don't need this
-                }
-            } while (notAnOption == true);
+                    Console.WriteLine("Would you like to purchase more items? (Y/N)");
+                    string buyMore = Console.ReadLine();
+                    buyMore = buyMore.ToLower();
+                    if (buyMore != "y" && buyMore != "n" && buyMore != "yes" && buyMore != "no")
+                    {
+                        Console.WriteLine("Please enter either Y/N");
+                        notAnOption = true;
+                    }
+                    else if (buyMore == "y" || buyMore == "yes")
+                    {
+                        notAnOption = false;
+                        BuyItems();
+                    }
+                    else if (buyMore == "n" || buyMore == "no")
+                    {
+                        notAnOption = false;
+                        //break; don't need this
+                    }
+                } while (notAnOption == true); //put the method into UI --> return makeChange (bool)
+
+                //Display current recipe
+                recipe.DisplayRecipe();
+
+                //ask if player would like to change recipe
+
+                //ask how many pitchers they would like poured
+                UserInterface.GetNumberOfPitchers();
+                //do math.....................................
+
+                //ask how much player wants to charge per cup
+
+                //method in customer class that adds money to player wallet after every purchase?
+            }
+
         }
         public void BuyItems()
         {
-            Store store = new(); //this is definitely not how I should be doing this.......
             store.SellLemons(player);
             store.SellSugarCubes(player);
             store.SellIceCubes(player);

@@ -32,12 +32,6 @@ namespace LemonadeStand
             Console.WriteLine($"You have {inventory.iceCubes.Count} ice cubes.");
             Console.WriteLine($"You have {inventory.cups.Count} cups.");
         }
-        //public void BuyItems()
-        //{
-        //    Store store = new(); //this is definitely not how I should be doing this.......
-        //    store.SellLemons(player);
-
-        //}
-
+        
     }
 }

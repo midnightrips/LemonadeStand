@@ -67,6 +67,12 @@ namespace LemonadeStand
             
             return playAgain;
         }
+        public static int NumberOfCustomers(int min, int max)
+        {
+            Random rand = new();
+            int numberOfCustomers = rand.Next(min, max);
+            return numberOfCustomers;
+        }
 
     }
 }

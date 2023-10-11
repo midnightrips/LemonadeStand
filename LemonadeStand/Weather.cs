@@ -13,17 +13,15 @@ namespace LemonadeStand
         public int temperature;
         private List<string> weatherConditions;
         public string predictedForecast;
-        Random rand;
+        public Random randomWeather;
         public Weather()
         {
             weatherConditions = new List<string> { "Sunny", "Cloudy", "Rain"};
-            rand = new Random();
-        }
-
-        
+            randomWeather = new Random();
+        }        
         public void Forecast()
         {
-            int conditionIndex = rand.Next(weatherConditions.Count);
+            int conditionIndex = randomWeather.Next(weatherConditions.Count);
             condition = weatherConditions[conditionIndex];
 
             if(condition == "Sunny")
@@ -40,12 +38,12 @@ namespace LemonadeStand
             }
 
             //predictedForecast = rand.Next()
-            Console.WriteLine(predictedForecast);
+            Console.WriteLine($"Forecast: {predictedForecast}.");
         }
 
         public void ActualWeather()
         {
-            temperature = rand.Next(50, 101);
+            temperature = randomWeather.Next(50, 101);
             Console.WriteLine($"The weather is {condition} and {temperature} degrees.");
         }
 
