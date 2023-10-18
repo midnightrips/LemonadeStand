@@ -11,6 +11,7 @@ namespace LemonadeStand
         public Weather weather;
         public List<Customer> customers;
         int numberOfCustomers;
+        int goodPrice;
 
         public Day()
         {
@@ -19,10 +20,8 @@ namespace LemonadeStand
         }
 
         //member methods (CAN DO)
-
         public void IsCustomer() //method for instantiating customers
         {
-            //if weather <75 instantiate random number of customers, but a smaller range of possible number of customers
             if(weather.temperature <= 70)
             {
                 numberOfCustomers = UserInterface.NumberOfCustomers(7, 20);
@@ -41,6 +40,17 @@ namespace LemonadeStand
                     customers.Add(customer);
                 }
             }
+        }
+        public void BuyLemonade()
+        {
+            //if() pirce is less than $3
+                //goodPrice = UserInterface.ChooseToBuy(5, customers.Count);
+
+            //else if() price is $3-$5
+                //goodPrice = UserInterface.ChooseToBuy(3, customers.Count - 3);
+
+            //else if() price is greater than $5
+                //goodPrice = UserInterface.ChooseToBuy(0, customer.Count - 6);
         }
 
     }

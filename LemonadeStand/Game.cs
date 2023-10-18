@@ -72,12 +72,15 @@ namespace LemonadeStand
                 recipe.DisplayRecipe();
 
                 //ask if player would like to change recipe
+                UserInterface.ChangeRecipe();
+                //create logic for changing the recipe class if they choose to do so
 
                 //ask how many pitchers they would like poured
                 UserInterface.GetNumberOfPitchers();
                 //do math.....................................
 
                 //ask how much player wants to charge per cup
+                LemonadePrice();
 
                 //method in customer class that adds money to player wallet after every purchase?
             }
@@ -91,6 +94,10 @@ namespace LemonadeStand
             store.SellCups(player);
         }
 
+        public void LemonadePrice()
+        {
+            //asks how much they would like to charge per cup and sets that price for the day
+        }
 
     }
 }

@@ -73,6 +73,42 @@ namespace LemonadeStand
             int numberOfCustomers = rand.Next(min, max);
             return numberOfCustomers;
         }
+        public static int ChooseToBuy(int min, int max)
+        {
+            Random rand = new();
+            int goodPrice = rand.Next(min, max);
+            return goodPrice;
+        }
+        public static bool ChangeRecipe()
+        {
+            Recipe recipe = new();
+            bool recipeChoice = false;
+
+            Console.WriteLine($"{recipe.DisplayRecipe}\nWould you like to change the recipe? Y/N");
+            string change = Console.ReadLine();
+            change = change.ToLower();
+            int doLoop = 1;
+            while(doLoop == 1)
+            {
+                if (change == "y" || change == "yes")
+                {
+                    recipeChoice = true;
+                    doLoop = 0;
+                }
+                else if (change == "n" || change == "no")
+                {
+                    recipeChoice = false;
+                    doLoop = 0;
+                }
+                else
+                {
+                    Console.WriteLine("Unrecognized input. Please enter a Y or N:");
+                    doLoop = 1;
+                }
+            }
+
+            return recipeChoice;
+        }
 
     }
 }
