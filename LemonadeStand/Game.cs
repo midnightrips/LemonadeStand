@@ -13,6 +13,7 @@ namespace LemonadeStand
         private int currentDay;
         public Store store;
         public Recipe recipe;
+        public Day day;
 
         public Game()
         {
@@ -20,6 +21,7 @@ namespace LemonadeStand
             //instantiate new list of days
             store = new();
             recipe = new();
+            day = new();
         }
 
         //member methods (CAN DO)
@@ -39,7 +41,7 @@ namespace LemonadeStand
                 Console.WriteLine($"\nDay {currentDay} begins!\n");
 
                 
-                //day.weather.Forecast();
+                day.weather.Forecast();
 
                 //Display player’s inventory and amount of money they have
                 player.DisplayInventory();
@@ -72,8 +74,17 @@ namespace LemonadeStand
                 recipe.DisplayRecipe();
 
                 //ask if player would like to change recipe
-                UserInterface.ChangeRecipe();
+                bool recipeChoice = UserInterface.ChangeRecipe();
                 //create logic for changing the recipe class if they choose to do so
+                if(recipeChoice == true)
+                {
+                    recipe.RecipeChange();
+                    // recipe.DisplayRecipe(); -- display recipe and ask if this is correct. If they would still like to change it again, add that option!
+                }
+                else
+                {
+                    continue;
+                }
 
                 //ask how many pitchers they would like poured
                 UserInterface.GetNumberOfPitchers();
