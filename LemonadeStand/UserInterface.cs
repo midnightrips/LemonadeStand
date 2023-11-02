@@ -73,11 +73,20 @@ namespace LemonadeStand
             int numberOfCustomers = rand.Next(min, max);
             return numberOfCustomers;
         }
-        public static int ChooseToBuy(int min, int max)
+        public static bool ChooseToBuy(int min, int max)
         {
             Random rand = new();
-            int goodPrice = rand.Next(min, max);
-            return goodPrice;
+            bool buy = false;
+            int goodprice = rand.Next(min, max);
+            if (goodprice >= 5)
+            {
+                buy = true;
+            }
+            else
+            {
+                buy = false;
+            }
+            return buy;
         }
         public static bool ChangeRecipe()
         {

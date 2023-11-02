@@ -14,14 +14,30 @@ namespace LemonadeStand
         public Store store;
         public Recipe recipe;
         public Day day;
+        public double dollarsPerCup;
+        public Customer customer;
+        public bool buy;
+        public Wallet wallet;
 
         public Game()
         {
             player = new Player();
             //instantiate new list of days
+            days = new List<Day>
+            {
+                day,
+                day,
+                day,
+                day,
+                day,
+                day,
+                day
+            };
             store = new();
             recipe = new();
             day = new();
+            customer = new();
+            wallet = new();
         }
 
         //member methods (CAN DO)
@@ -83,17 +99,24 @@ namespace LemonadeStand
                 }
                 else
                 {
-                    continue;
+                    
                 }
 
                 //ask how many pitchers they would like poured
                 UserInterface.GetNumberOfPitchers();
-                //do math.....................................
 
                 //ask how much player wants to charge per cup
-                LemonadePrice();
+                dollarsPerCup = LemonadePrice();
+
+                //actual weather
+                day.weather.ActualWeather();
+
+                //customer walks by and purchase method
+                day.IsCustomer();
+                BuyLemonade(dollarsPerCup);
 
                 //method in customer class that adds money to player wallet after every purchase?
+
             }
 
         }
@@ -105,10 +128,64 @@ namespace LemonadeStand
             store.SellCups(player);
         }
 
-        public void LemonadePrice()
+        public double LemonadePrice()
         {
             //asks how much they would like to charge per cup and sets that price for the day
+            Console.WriteLine("How much would you like to charge per cup of lemonade? (e.g. 2.50)");
+            string dollars = Console.ReadLine();
+            dollarsPerCup = Double.Parse(dollars);
+            Console.WriteLine($"Price per cup set to ${dollarsPerCup}."); //change this to print with 2 decimal places
+            return dollarsPerCup;
+            //add option to change price again
         }
+        public void BuyLemonade(double dollarsPerCup)
+        {
+            if (dollarsPerCup <= 3.0)
+            {
+                foreach (Customer customer in day.customers)
+                {
+                    Console.WriteLine("A customer walks by...");
+                    buy = UserInterface.ChooseToBuy(1, 40);
+                    if (buy == true)
+                    {
+                        Console.WriteLine("They bought a cup!");
+                        wallet.AcceptMoney(dollarsPerCup);
+                    }
+                    else
+                    {
+                        //buy = false; //don't need this
+                    }
+                }
+            }
+            else if (dollarsPerCup > 3.0 && dollarsPerCup <= 5.0)
+            {
+                Console.WriteLine("A customer walks by...");
+                buy = UserInterface.ChooseToBuy(1, 10);
+                if (buy == true)
+                {
+                    Console.WriteLine("They bought a cup!");
+                    wallet.AcceptMoney(dollarsPerCup);
+                }
+                else
+                {
+                    //buy = false; //don't need this
+                }
+            }
+            else if (dollarsPerCup > 5.0)
+            {
+                Console.WriteLine("A customer walks by...");
+                buy = UserInterface.ChooseToBuy(1, 8);
+                if (buy == true)
+                {
+                    Console.WriteLine("They bought a cup!");
+                    wallet.AcceptMoney(dollarsPerCup);
+                }
+                else
+                {
+                    //buy = false; //don't need this
+                }
+            }
 
+        }
     }
 }
