@@ -13,6 +13,7 @@ namespace LemonadeStand
         public Inventory inventory;
         public Wallet wallet;
         public Recipe recipe;
+        public int numberOfPitchers;
 
         // constructor (SPAWNER)
         public Player()
@@ -32,6 +33,28 @@ namespace LemonadeStand
             Console.WriteLine($"You have {inventory.iceCubes.Count} ice cubes.");
             Console.WriteLine($"You have {inventory.cups.Count} cups.");
         }
-        
+        public void MakePitchers()
+        {
+            numberOfPitchers = UserInterface.GetNumberOfPitchers();
+            for(int i = 0; i < numberOfPitchers + 1; i++)
+            {
+                int numberOfLemons = recipe.numberOfLemons;
+                inventory.UseLemons(numberOfLemons);
+
+                int numberOfSugarCubes = recipe.numberOfSugarCubes;
+                inventory.UseSugarCubes(numberOfSugarCubes);
+
+                int numberOfIceCubes = recipe.numberOfIceCubes;
+                inventory.UseIceCubes(numberOfIceCubes);
+
+                int numberOfCups = 8;
+                inventory.UseCups(numberOfCups);
+            }
+        }
+        public void UseIngredients(int numberOfPitchers)
+        {
+            //for()
+            //recipe.numberOfLemons
+        }
     }
 }

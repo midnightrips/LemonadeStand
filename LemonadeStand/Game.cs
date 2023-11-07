@@ -18,6 +18,10 @@ namespace LemonadeStand
         public Customer customer;
         public bool buy;
         public Wallet wallet;
+        private List<Customer> trueCustomers;
+        private double moneyMade;
+        public bool cupsLeft;
+        public int numberOfPitchers;
 
         public Game()
         {
@@ -38,6 +42,8 @@ namespace LemonadeStand
             day = new();
             customer = new();
             wallet = new();
+            moneyMade = 0;
+            numberOfPitchers = 0;
         }
 
         //member methods (CAN DO)
@@ -71,7 +77,7 @@ namespace LemonadeStand
                     buyMore = buyMore.ToLower();
                     if (buyMore != "y" && buyMore != "n" && buyMore != "yes" && buyMore != "no")
                     {
-                        Console.WriteLine("Please enter either Y/N");
+                        Console.WriteLine("Unrecognized input. Please enter a Y or N:");
                         notAnOption = true;
                     }
                     else if (buyMore == "y" || buyMore == "yes")
@@ -103,7 +109,7 @@ namespace LemonadeStand
                 }
 
                 //ask how many pitchers they would like poured
-                UserInterface.GetNumberOfPitchers();
+                player.MakePitchers();
 
                 //ask how much player wants to charge per cup
                 dollarsPerCup = LemonadePrice();
@@ -116,6 +122,7 @@ namespace LemonadeStand
                 BuyLemonade(dollarsPerCup);
 
                 //method in customer class that adds money to player wallet after every purchase?
+                DisplayEarnings();
 
             }
 
@@ -127,11 +134,14 @@ namespace LemonadeStand
             store.SellIceCubes(player);
             store.SellCups(player);
         }
-
+        public void DisplayEarnings()
+        {
+            Console.WriteLine($"{day.customers.Count} walked by today.\n{trueCustomers.Count} of them bought a cup.\nYou made a total of ${moneyMade} today."); // logic for displaying the number of cups bought and the total amount of money made that day
+        }
         public double LemonadePrice()
         {
             //asks how much they would like to charge per cup and sets that price for the day
-            Console.WriteLine("How much would you like to charge per cup of lemonade? (e.g. 2.50)");
+            Console.WriteLine("\nHow much would you like to charge per cup of lemonade? (e.g. 2.50)");
             string dollars = Console.ReadLine();
             dollarsPerCup = Double.Parse(dollars);
             Console.WriteLine($"Price per cup set to ${dollarsPerCup}."); //change this to print with 2 decimal places
@@ -140,6 +150,8 @@ namespace LemonadeStand
         }
         public void BuyLemonade(double dollarsPerCup)
         {
+            trueCustomers = new List<Customer> { };
+            moneyMade = 0;
             if (dollarsPerCup <= 3.0)
             {
                 foreach (Customer customer in day.customers)
@@ -150,39 +162,63 @@ namespace LemonadeStand
                     {
                         Console.WriteLine("They bought a cup!");
                         wallet.AcceptMoney(dollarsPerCup);
+                        trueCustomers.Add(customer);
+                        moneyMade += dollarsPerCup;
                     }
-                    else
+                    else if (buy == true && cupsLeft == false)
                     {
-                        //buy = false; //don't need this
+                        Console.WriteLine("Sold out!");
+                    }
+                    else if (buy == false)
+                    {
+
                     }
                 }
             }
             else if (dollarsPerCup > 3.0 && dollarsPerCup <= 5.0)
             {
-                Console.WriteLine("A customer walks by...");
-                buy = UserInterface.ChooseToBuy(1, 10);
-                if (buy == true)
+                foreach (Customer customer in day.customers)
                 {
-                    Console.WriteLine("They bought a cup!");
-                    wallet.AcceptMoney(dollarsPerCup);
-                }
-                else
-                {
-                    //buy = false; //don't need this
+                    Console.WriteLine("A customer walks by...");
+                    buy = UserInterface.ChooseToBuy(1, 10);
+                    if (buy == true) // && cupsLeft == true
+                    {
+                        Console.WriteLine("They bought a cup!");
+                        wallet.AcceptMoney(dollarsPerCup);
+                        trueCustomers.Add(customer);
+                        moneyMade += dollarsPerCup;
+                    }
+                    else if (buy == true && cupsLeft == false)
+                    {
+                        Console.WriteLine("Sold out!");
+                    }
+                    else if (buy == false)
+                    {
+
+                    }
                 }
             }
             else if (dollarsPerCup > 5.0)
             {
-                Console.WriteLine("A customer walks by...");
-                buy = UserInterface.ChooseToBuy(1, 8);
-                if (buy == true)
+                foreach (Customer customer in day.customers)
                 {
-                    Console.WriteLine("They bought a cup!");
-                    wallet.AcceptMoney(dollarsPerCup);
-                }
-                else
-                {
-                    //buy = false; //don't need this
+                    Console.WriteLine("A customer walks by...");
+                    buy = UserInterface.ChooseToBuy(1, 8);
+                    if (buy == true)
+                    {
+                        Console.WriteLine("They bought a cup!");
+                        wallet.AcceptMoney(dollarsPerCup);
+                        trueCustomers.Add(customer);
+                        moneyMade += dollarsPerCup;
+                    }
+                    else if (buy == true && cupsLeft == false)
+                    {
+                        Console.WriteLine("Sold out!");
+                    }
+                    else if (buy == false)
+                    {
+
+                    }
                 }
             }
 

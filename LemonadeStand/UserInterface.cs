@@ -31,8 +31,8 @@ namespace LemonadeStand
 
             while (!userInputIsAnInteger || quantityOfItem < 0)
             {
-                Console.WriteLine("Each pitcher pours 8 cups. How many pitchers would you like to make?");
-                Console.WriteLine("Please enter a positive integer (or 0 to cancel):");
+                Console.WriteLine("\nEach pitcher pours 8 cups. How many pitchers would you like to make?");
+                Console.WriteLine("Please enter a positive integer (ex: 1):"); // need to write logic for when you ask to make more pitchers than your ingredients allow
 
                 userInputIsAnInteger = Int32.TryParse(Console.ReadLine(), out quantityOfItem);
             }
@@ -93,12 +93,13 @@ namespace LemonadeStand
             Recipe recipe = new();
             bool recipeChoice = false;
 
-            Console.WriteLine($"{recipe.DisplayRecipe}\nWould you like to change the recipe? Y/N");
-            string change = Console.ReadLine();
-            change = change.ToLower();
             int doLoop = 1;
             while(doLoop == 1)
             {
+                Console.WriteLine($"{recipe.DisplayRecipe}\nWould you like to change the recipe? Y/N");
+                string change = Console.ReadLine();
+                change = change.ToLower();
+
                 if (change == "y" || change == "yes")
                 {
                     recipeChoice = true;

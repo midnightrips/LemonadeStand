@@ -44,7 +44,7 @@ namespace LemonadeStand
         public void ActualWeather()
         {
             temperature = randomWeather.Next(50, 101);
-            Console.WriteLine($"The weather is {condition} and {temperature} degrees.");
+            Console.WriteLine($"\nThe weather is {condition} and {temperature} degrees.");
         }
 
     }

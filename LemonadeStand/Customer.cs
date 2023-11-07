@@ -24,6 +24,11 @@ namespace LemonadeStand
             wallet = new();
             //game = new();
         }
+        public void DrinkLemonade()
+        {
+            //method for removing number of cups?
+
+        }
         //public void BuyLemonade(double dollarsPerCup)
         //{
         //    if (dollarsPerCup <= 3.0)

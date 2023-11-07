@@ -11,7 +11,6 @@ namespace LemonadeStand
         public Weather weather;
         public List<Customer> customers;
         int numberOfCustomers;
-        int goodPrice;
         bool buy;
         public Wallet wallet;
 
