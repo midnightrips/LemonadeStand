@@ -69,6 +69,7 @@ namespace LemonadeStand
                 player.DisplayInventory();
 
                 //Ask if they want to go to store
+                //UserInterface.GoToStore(); fix this
                 bool notAnOption = false;
                 do //I feel like this can be put into the UI (purchase items and change recipe)
                 {
@@ -123,9 +124,14 @@ namespace LemonadeStand
 
                 //method in customer class that adds money to player wallet after every purchase?
                 DisplayEarnings();
-
             }
-
+            GameOver();
+            UserInterface.PlayAgain();
+        }
+        public void GameOver()
+        {
+            Console.WriteLine("You've reached the end of the week!");
+            Console.WriteLine($"You managed to make a total of ${wallet.Money}!");
         }
         public void BuyItems()
         {
@@ -150,7 +156,7 @@ namespace LemonadeStand
         }
         public void BuyLemonade(double dollarsPerCup)
         {
-            trueCustomers = new List<Customer> { };
+            trueCustomers = new List<Customer>{};
             moneyMade = 0;
             if (dollarsPerCup <= 3.0)
             {

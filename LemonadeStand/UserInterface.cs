@@ -88,6 +88,33 @@ namespace LemonadeStand
             }
             return buy;
         }
+        //public static void GoToStore()
+        //{
+        //    Player player = new();
+        //    bool notAnOption = false;
+        //    do //I feel like this can be put into the UI (purchase items and change recipe)
+        //    {
+        //        Console.WriteLine("Would you like to purchase more items? (Y/N)");
+        //        string buyMore = Console.ReadLine();
+        //        buyMore = buyMore.ToLower();
+        //        if (buyMore != "y" && buyMore != "n" && buyMore != "yes" && buyMore != "no")
+        //        {
+        //            Console.WriteLine("Unrecognized input. Please enter a Y or N:");
+        //            notAnOption = true;
+        //        }
+        //        else if (buyMore == "y" || buyMore == "yes")
+        //        {
+        //            notAnOption = false;
+        //            BuyItems(); //currently in game class -- put BuyItems in player class
+        //        }
+        //        else if (buyMore == "n" || buyMore == "no")
+        //        {
+        //            notAnOption = false;
+        //            //break; don't need this
+        //        }
+        //    } while (notAnOption == true); //put the method into UI --> return makeChange (bool)
+        //}
+
         public static bool ChangeRecipe()
         {
             Recipe recipe = new();

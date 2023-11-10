@@ -14,6 +14,7 @@ namespace LemonadeStand
         public Wallet wallet;
         public Recipe recipe;
         public int numberOfPitchers;
+        public Store store;
 
         // constructor (SPAWNER)
         public Player()
@@ -21,6 +22,7 @@ namespace LemonadeStand
             inventory = new Inventory();
             wallet = new Wallet();
             recipe = new Recipe();
+            store = new();
         }
 
         // member methods (CAN DO)
@@ -56,5 +58,12 @@ namespace LemonadeStand
             //for()
             //recipe.numberOfLemons
         }
+        //public void BuyItems()
+        //{
+        //    store.SellLemons();
+        //    store.SellSugarCubes();
+        //    store.SellIceCubes(player);
+        //    store.SellCups(player);
+        //}
     }
 }

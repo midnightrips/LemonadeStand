@@ -68,8 +68,8 @@ namespace LemonadeStand
         {
             for(int i = 0; i < numberOfLemons + 1; i++)
             {
-                Lemon lemon = new();
-                lemons.Remove(lemon);
+                //Lemon lemon = new();
+                lemons.Remove(lemons[i]);
                 
             }
         }
@@ -77,24 +77,24 @@ namespace LemonadeStand
         {
             for (int i = 0; i < numberOfSugarCubes + 1; i++)
             {
-                SugarCube sugarCube = new();
-                sugarCubes.Remove(sugarCube);
+                //SugarCube sugarCube = new();
+                sugarCubes.Remove(sugarCubes[i]);
             }
         }
         public void UseIceCubes(int numberOfIceCubes)
         {
             for (int i = 0; i < numberOfIceCubes + 1; i++)
             {
-                IceCube iceCube = new();
-                iceCubes.Remove(iceCube);
+                //IceCube iceCube = new();
+                iceCubes.Remove(iceCubes[i]);
             }
         }
         public void UseCups(int numberOfCups)
         {
             for (int i = 0; i < numberOfCups + 1; i++)
             {
-                Cup cup = new();
-                cups.Remove(cup);
+                //Cup cup = new();
+                cups.Remove(cups[i]);
             }
         }
     }
