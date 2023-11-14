@@ -17,11 +17,11 @@ namespace LemonadeStand
         public double dollarsPerCup;
         public Customer customer;
         public bool buy;
-        public Wallet wallet;
         private List<Customer> trueCustomers;
         private double moneyMade;
         public bool cupsLeft;
         public int numberOfPitchers;
+        public bool playAgain;
 
         public Game()
         {
@@ -41,9 +41,9 @@ namespace LemonadeStand
             recipe = new();
             day = new();
             customer = new();
-            wallet = new();
             moneyMade = 0;
             numberOfPitchers = 0;
+            playAgain = false;
         }
 
         //member methods (CAN DO)
@@ -54,84 +54,89 @@ namespace LemonadeStand
         }
         public void PlayGame() // this is where most of the methods will be called
         {
-            
-            DisplayWelcome();
-            for (currentDay = 1; currentDay < 8; currentDay++)
+            do
             {
+                DisplayWelcome();
 
-                //Display day currentDay #
-                Console.WriteLine($"\nDay {currentDay} begins!\n");
-
-                
-                day.weather.Forecast();
-
-                //Display player’s inventory and amount of money they have
-                player.DisplayInventory();
-
-                //Ask if they want to go to store
-                //UserInterface.GoToStore(); fix this
-                bool notAnOption = false;
-                do //I feel like this can be put into the UI (purchase items and change recipe)
+                for (currentDay = 1; currentDay < 8; currentDay++)
                 {
-                    Console.WriteLine("Would you like to purchase more items? (Y/N)");
-                    string buyMore = Console.ReadLine();
-                    buyMore = buyMore.ToLower();
-                    if (buyMore != "y" && buyMore != "n" && buyMore != "yes" && buyMore != "no")
-                    {
-                        Console.WriteLine("Unrecognized input. Please enter a Y or N:");
-                        notAnOption = true;
-                    }
-                    else if (buyMore == "y" || buyMore == "yes")
-                    {
-                        notAnOption = false;
-                        BuyItems();
-                    }
-                    else if (buyMore == "n" || buyMore == "no")
-                    {
-                        notAnOption = false;
-                        //break; don't need this
-                    }
-                } while (notAnOption == true); //put the method into UI --> return makeChange (bool)
 
-                //Display current recipe
-                recipe.DisplayRecipe();
+                    //Display day currentDay #
+                    Console.WriteLine($"\nDay {currentDay} begins!\n");
 
-                //ask if player would like to change recipe
-                bool recipeChoice = UserInterface.ChangeRecipe();
-                //create logic for changing the recipe class if they choose to do so
-                if(recipeChoice == true)
-                {
-                    recipe.RecipeChange();
-                    // recipe.DisplayRecipe(); -- display recipe and ask if this is correct. If they would still like to change it again, add that option!
+
+                    day.weather.Forecast();
+
+                    //Display player’s inventory and amount of money they have
+                    player.DisplayInventory();
+
+                    //Ask if they want to go to store
+                    //UserInterface.GoToStore(); fix this
+                    bool notAnOption = false;
+                    do //I feel like this can be put into the UI (purchase items and change recipe)
+                    {
+                        Console.WriteLine("Would you like to purchase more items? (Y/N)");
+                        string buyMore = Console.ReadLine();
+                        buyMore = buyMore.ToLower();
+                        if (buyMore != "y" && buyMore != "n" && buyMore != "yes" && buyMore != "no")
+                        {
+                            Console.WriteLine("Unrecognized input. Please enter a Y or N:");
+                            notAnOption = true;
+                        }
+                        else if (buyMore == "y" || buyMore == "yes")
+                        {
+                            notAnOption = false;
+                            BuyItems();
+                        }
+                        else if (buyMore == "n" || buyMore == "no")
+                        {
+                            notAnOption = false;
+                            //break; don't need this
+                        }
+                    } while (notAnOption == true); //put the method into UI --> return makeChange (bool)
+
+                    //Display current recipe
+                    recipe.DisplayRecipe();
+
+                    //ask if player would like to change recipe
+                    bool recipeChoice = UserInterface.ChangeRecipe();
+                    //create logic for changing the recipe class if they choose to do so
+                    if (recipeChoice == true)
+                    {
+                        recipe.RecipeChange();
+                        // recipe.DisplayRecipe(); -- display recipe and ask if this is correct. If they would still like to change it again, add that option!
+                    }
+                    else
+                    {
+
+                    }
+
+                    //ask how many pitchers they would like poured
+                    player.MakePitchers();
+
+                    //ask how much player wants to charge per cup
+                    dollarsPerCup = LemonadePrice();
+
+                    //actual weather
+                    day.weather.ActualWeather();
+
+                    //customer walks by and purchase method
+                    day.IsCustomer();
+                    BuyLemonade(dollarsPerCup);
+
+                    //method in customer class that adds money to player wallet after every purchase?
+                    DisplayEarnings();
                 }
-                else
-                {
-                    
-                }
+                GameOver();
+                playAgain = UserInterface.PlayAgain();
+            } while (playAgain == true);
 
-                //ask how many pitchers they would like poured
-                player.MakePitchers();
-
-                //ask how much player wants to charge per cup
-                dollarsPerCup = LemonadePrice();
-
-                //actual weather
-                day.weather.ActualWeather();
-
-                //customer walks by and purchase method
-                day.IsCustomer();
-                BuyLemonade(dollarsPerCup);
-
-                //method in customer class that adds money to player wallet after every purchase?
-                DisplayEarnings();
-            }
-            GameOver();
-            UserInterface.PlayAgain();
+            Console.WriteLine("Thanks for playing Lemonade Stand!");
         }
         public void GameOver()
         {
             Console.WriteLine("You've reached the end of the week!");
-            Console.WriteLine($"You managed to make a total of ${wallet.Money}!");
+            Console.WriteLine($"You managed to make a total of ${player.wallet.Money}!");
         }
         public void BuyItems()
         {
@@ -167,7 +172,7 @@ namespace LemonadeStand
                     if (buy == true)
                     {
                         Console.WriteLine("They bought a cup!");
-                        wallet.AcceptMoney(dollarsPerCup);
+                        player.wallet.AcceptMoney(dollarsPerCup);
                         trueCustomers.Add(customer);
                         moneyMade += dollarsPerCup;
                     }
@@ -190,7 +195,7 @@ namespace LemonadeStand
                     if (buy == true) // && cupsLeft == true
                     {
                         Console.WriteLine("They bought a cup!");
-                        wallet.AcceptMoney(dollarsPerCup);
+                        player.wallet.AcceptMoney(dollarsPerCup);
                         trueCustomers.Add(customer);
                         moneyMade += dollarsPerCup;
                     }
@@ -213,7 +218,7 @@ namespace LemonadeStand
                     if (buy == true)
                     {
                         Console.WriteLine("They bought a cup!");
-                        wallet.AcceptMoney(dollarsPerCup);
+                        player.wallet.AcceptMoney(dollarsPerCup);
                         trueCustomers.Add(customer);
                         moneyMade += dollarsPerCup;
                     }
